@@ -19,3 +19,7 @@ npx sequelize db:seed:undo:all
 ```
 npx sequelize db:seed:all
 ```
+
+```
+npx sequelize model:generate --name City --attributes name:string
+```
