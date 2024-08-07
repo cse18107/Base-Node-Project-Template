@@ -48,7 +48,7 @@ async function getAirplane(id) {
       );
     }
     throw new AppError(
-      "Cannot fetch data of all the airplanes",
+      "Cannot fetch data of the airplane",
       StatusCodes.INTERNAL_SERVER_ERROR
     );
   }
@@ -66,7 +66,33 @@ async function destroyAirplane(id) {
       );
     }
     throw new AppError(
-      "Cannot fetch data of all the airplanes",
+      "Cannot delete the data of the airplane",
+      StatusCodes.INTERNAL_SERVER_ERROR
+    );
+  }
+}
+
+async function updateAirplane(id, data) {
+  try {
+    const response = await airplaneRepository.update(id, data);
+    return response;
+  } catch (error) {
+    if (error.statusCode === StatusCodes.NOT_FOUND) {
+      throw new AppError(
+        "The airplane you requested to update is not present",
+        StatusCodes.NOT_FOUND
+      );
+    }
+     if (error.name === "SequelizeValidationError") {
+       let explanation = [];
+       error.errors.forEach((err) => {
+         explanation.push(err.message);
+       });
+       console.log(explanation);
+       throw new AppError(explanation, StatusCodes.BAD_REQUEST);
+     }
+    throw new AppError(
+      "Cannot update data of the airplane",
       StatusCodes.INTERNAL_SERVER_ERROR
     );
   }
@@ -77,4 +103,5 @@ module.exports = {
   getAirplanes,
   getAirplane,
   destroyAirplane,
+  updateAirplane,
 };
