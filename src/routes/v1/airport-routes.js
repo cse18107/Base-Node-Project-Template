@@ -9,5 +9,6 @@ router.post('/',AirportMiddlewares.validationCreateRequest, AirportController.cr
 router.get("/", AirportController.getAirports);
 router.get("/:id", AirportController.getAirport);
 router.delete("/:id", AirportController.destroyAirport);
+router.put("/:id", AirportController.updateAirport);
 
 module.exports = router;
