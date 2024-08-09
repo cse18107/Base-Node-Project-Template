@@ -1,4 +1,4 @@
-sec 82 -> lec 15 -> 13:36
+sec 86 -> lec 5 -> 10:20
 
 ```
 npx sequelize db:create
@@ -27,7 +27,6 @@ npx sequelize model:generate --name City --attributes name:string
 ```
 npx sequelize migration:generate --name update-city-airport-association
 ```
-
 
 ```
 SELECT
